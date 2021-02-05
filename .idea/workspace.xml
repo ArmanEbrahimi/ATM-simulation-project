@@ -1,38 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/description.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Arman.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/META-INF/bank atm.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/ATM.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/Account.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/Bank.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/Event.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/Transaction$Operation.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/Transaction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/model/User.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/sample/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/sample/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/bank atm/sample/sample.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/ATM.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Account.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Bank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Transaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/sample.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -91,7 +60,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/ATM.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
+            <state relative-caret-position="2023">
               <caret line="119" column="36" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
             </state>
           </provider>
@@ -101,11 +70,9 @@
         <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="172">
-              <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
+              <caret line="209" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4334#4335#0" expanded="true" />
-                <element signature="e#4370#4371#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -114,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="1020">
               <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
             </state>
           </provider>
@@ -198,8 +165,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -343,7 +310,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.2912254" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.30030257" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -573,7 +540,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/ATM.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
+        <state relative-caret-position="2023">
           <caret line="119" column="36" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
         </state>
       </provider>
@@ -604,7 +571,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="1020">
           <caret line="60" column="63" selection-start-line="60" selection-start-column="63" selection-end-line="60" selection-end-column="63" />
         </state>
       </provider>
@@ -613,11 +580,9 @@
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
-          <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
+          <caret line="209" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4334#4335#0" expanded="true" />
-            <element signature="e#4370#4371#0" expanded="true" />
           </folding>
         </state>
       </provider>
