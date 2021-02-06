@@ -194,6 +194,7 @@ public class Controller {
             }
 
         //displaying  a message to user
+        Main.ChangeScene("optionsMenu");
         screen.setText("Welcome "+loggedUser.getName());
             //disabling text field
             textField.setDisable(true);

@@ -12,10 +12,14 @@ import model.User;
 import java.util.Scanner;
 
 public class Main extends Application {
+    protected static SceneController sc;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        sc = new SceneController();
+        sc.addScene("main",FXMLLoader.load(getClass().getResource("sample.fxml")));
+        sc.addScene("optionsMenu",FXMLLoader.load(getClass().getResource("optionMenu.fxml")));
+        Parent root = sc.activate("main");
         primaryStage.setTitle("Welcome to ATM");
         primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
@@ -28,4 +32,9 @@ public class Main extends Application {
 
 
     }
+    public static void ChangeScene(String name){
+        System.out.println("hey!");
+        sc.activate(name);
+    }
+
 }
