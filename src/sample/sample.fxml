@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <bottom>
       <SplitPane dividerPositions="0.6514285714285715" prefHeight="172.0" prefWidth="704.0" BorderPane.alignment="CENTER">
         <items>
@@ -59,7 +59,7 @@
                      <children>
                         <Button fx:id="buttonOK" mnemonicParsing="false" onAction="#okButtonHandler" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: GREEN;" text="OK" textFill="WHITE" />
                         <Button mnemonicParsing="false" onAction="#correctButtonHandler" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: YELLOW;" text="CORRECT" textFill="WHITE" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: RED;" text="CANCEL" textFill="WHITE" GridPane.rowIndex="2" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: RED;" text="CANCEL" textFill="WHITE" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>

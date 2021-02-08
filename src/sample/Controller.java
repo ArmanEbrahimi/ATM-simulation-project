@@ -1,17 +1,17 @@
 package sample;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Bank;
 import model.User;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Controller {
 
@@ -41,6 +41,8 @@ public class Controller {
     Button buttonZero;
     @FXML
     Button buttonOK;
+    @FXML
+    Button cancelButton;
     //variable for storing a string
     StringBuilder sb;
     //variable for storing id
@@ -61,7 +63,11 @@ public class Controller {
         User user = bank.addUser("Arman", "Ebrahimi", "1234");
         //executing promptmainManu method
         promptMainMenu(bank, screen);
-
+        //setting an action for cancel button
+        cancelButton.setOnMouseClicked(e->{
+            screen.setText("GoodBye!");
+            System.exit(0);
+        });
 
 
     }
@@ -72,144 +78,154 @@ public class Controller {
                 "\"Please Enter Your ID\"");
 
     }
-    public int handleAction(ActionEvent e){
+
+    public int handleAction(ActionEvent e) {
         //storing the source of the action
         Object source = e.getSource();
         //checking the value of the button
-        if(source.equals(buttonOne)){
+        if (source.equals(buttonOne)) {
             //appending the value to clipboard
             sb.append(1);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 1;
         }
-        if(source.equals(buttonTwo)) {
+        if (source.equals(buttonTwo)) {
             //appending the value to clipboard
             sb.append(2);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 2;
         }
-        if (source.equals(buttonThree)){
+        if (source.equals(buttonThree)) {
             //appending the value to clipboard
             sb.append(3);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 3;
         }
-        if (source.equals(buttonFour)){
+        if (source.equals(buttonFour)) {
             //appending the value to clipboard
             sb.append(4);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 4;
         }
-        if (source.equals(buttonFive)){
+        if (source.equals(buttonFive)) {
             //appending the value to clipboard
             sb.append(5);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 5;
         }
-        if (source.equals(buttonSix)){
+        if (source.equals(buttonSix)) {
             //appending the value to clipboard
             sb.append(6);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 6;
         }
-        if (source.equals(buttonSeven)){
+        if (source.equals(buttonSeven)) {
             //appending the value to clipboard
             sb.append(7);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 7;
         }
-        if (source.equals(buttonEight)){
+        if (source.equals(buttonEight)) {
             //appending the value to clipboard
             sb.append(8);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 8;
         }
-        if (source.equals(buttonNine)){
+        if (source.equals(buttonNine)) {
             //appending the value to clipboard
             sb.append(9);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 9;
         }
-        if (source.equals(buttonZero)){
+        if (source.equals(buttonZero)) {
             //appending the value to clipboard
             sb.append(0);
             //filling the text filed with value
-            setTextField(sb.toString(),textField);
+            setTextField(sb.toString(), textField);
             return 0;
         }
         //sending -1 as an indicator for a error
         return -1;
     }
+
     //inserting text into text field
-    public void setTextField(String s,TextField textField){
+    public void setTextField(String s, TextField textField) {
         textField.setText(s);
     }
+
     //method for handling ok button
-    public void okButtonHandler(){
+    public void okButtonHandler() throws IOException {
         //checking to see if id is assigned
-        if (isIdnull){
+        if (isIdnull) {
             //giving the value of string builder to id
             id = sb.toString();
             //making isIdnull variable false for next round
-            isIdnull =false;
+            isIdnull = false;
             //clearing string builder
-            sb.delete(0,sb.capacity());
+            sb.delete(0, sb.capacity());
             //clearing text field
             textField.clear();
             //displaying a message to user
             screen.setText("please enter your pin code: ");
-        }else {
+        } else {
             //giving the value of the string builder to pin
             pin = sb.toString();
             //clearing string builder
-            sb.delete(0,sb.capacity());
+            sb.delete(0, sb.capacity());
             //clearing text field
             textField.clear();
             //executing method
-            userLoginHandler(id,pin);
+            userLoginHandler(id, pin);
         }
     }
+
     //method for handling user login
-    public void userLoginHandler(String id, String pin){
+    public void userLoginHandler(String id, String pin) throws IOException {
         //init user
         User loggedUser;
-            loggedUser = bank.userLogin(id, pin);
-            //checking to see if login was successful
-            if (loggedUser == null){
-                //displaying a message to user
-                screen.setText("Either Id or Password was wrong, try again!"+"\n" +
-                        "\"Please Enter Your ID\"");
-                //resetting login process
-                isIdnull = true;
-                return;
-            }
+        loggedUser = bank.userLogin(id, pin);
+        //checking to see if login was successful
+        if (loggedUser == null) {
+            //displaying a message to user
+            screen.setText("Either Id or Password was wrong, try again!" + "\n" +
+                    "\"Please Enter Your ID\"");
+            //resetting login process
+            isIdnull = true;
+            return;
+        }
 
-        //displaying  a message to user
-        Main.ChangeScene("optionsMenu");
-        screen.setText("Welcome "+loggedUser.getName());
-            //disabling text field
-            textField.setDisable(true);
+        changeScreen(buttonOK.getScene(), "optionMenu");
+//        //displaying  a message to user
+//        screen.setText("Welcome "+loggedUser.getName());
+//            //disabling text field
+//            textField.setDisable(true);
     }
+
     @FXML
     //method for handling correct button
-    public void correctButtonHandler(){
+    public void correctButtonHandler() {
         //checking for last character
-        if(sb.length() >= 1){
+        if (sb.length() >= 1) {
             //deleting the last character in string builder
-            sb.deleteCharAt((sb.length())-1);
+            sb.deleteCharAt((sb.length()) - 1);
             //deleting last character of text field
             textField.setText(sb.toString());
 
         }
     }
 
+    public void changeScreen(Scene main, String name) throws IOException {
+        SceneController sc = new SceneController(main);
+        sc.addScreen("optionMenu", FXMLLoader.load(getClass().getResource("optionMenu.fxml")));
+        sc.activate(name);
+    }
 }
