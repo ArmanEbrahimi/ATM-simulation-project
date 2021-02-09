@@ -1,18 +1,19 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import model.Event;
+import javafx.scene.layout.BorderPane;
 import model.User;
 
+import java.io.IOException;
 
 
 public class OptionMenuController {
     private User user;
     @FXML
-    Button balance;
+    BorderPane mainPane;
     public void initialize(){
 
     }
@@ -36,5 +37,17 @@ public class OptionMenuController {
         //displaying the alert
         alert.showAndWait();
     }
+    @FXML
+    //method for showing the deposit window
+    public void showDepositWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("depositWindow.fxml"));
+        Scene scene = mainPane.getScene();
+        scene.setRoot(loader.load());
+        DepositController controller = loader.getController();
+        //passing the user to deposit controller
+        controller.setUser(user);
+    }
+
 
 }

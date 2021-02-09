@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionMenuController">
+<BorderPane fx:id="mainPane" prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionMenuController">
     <bottom>
         <SplitPane dividerPositions="0.6514285714285715" prefHeight="172.0" prefWidth="704.0" BorderPane.alignment="CENTER">
             <items>
@@ -130,7 +130,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onAction="#showDepositWindow" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets right="5.0" />
                </GridPane.margin>

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SceneController {
-    //initing a map with key of string and value of pane
+    //init a map with key of string and value of pane
     private Map<String, Pane> scenes = new HashMap<>();
     //variable for main scene
     private Scene main;

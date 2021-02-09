@@ -2,25 +2,15 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import model.Bank;
 import model.User;
 
 import java.io.IOException;
 
-public class Controller {
-
-    @FXML
-    Label screen;
-    @FXML
-    TextField textField;
+public class DepositController {
     @FXML
     Button buttonOne;
     @FXML
@@ -46,42 +36,11 @@ public class Controller {
     @FXML
     Button cancelButton;
     @FXML
-            Pane mainPane;
-    //variable for storing a string
-    StringBuilder sb;
-    //variable for storing id
-    String id;
-    //variable for storing pincode
-    String pin;
-    //variable for storing a bank
-    Bank bank;
-    //variable to check if the id is assigned
-    boolean isIdnull = true;
-
-    public void initialize() {
-        //init string builder
-        sb = new StringBuilder();
-        //init bank
-        bank = new Bank("Melli");
-        //init user
-        User user = bank.addUser("Arman", "Ebrahimi", "1234");
-        //executing promptmainManu method
-        promptMainMenu(bank, screen);
-        //setting an action for cancel button
-        cancelButton.setOnMouseClicked(e->{
-            screen.setText("GoodBye!");
-            System.exit(0);
-        });
-
-
-    }
-
-    private static void promptMainMenu(Bank bank, Label label) {
-        //displaying welcome message to user
-        label.setText("Welcome to Bank " + bank.getName() + "\n" +
-                "\"Please Enter Your ID\"");
-
-    }
+    TextField textField;
+    @FXML
+    Pane mainPane;
+    StringBuilder sb = new StringBuilder();
+    private User user;
 
     public int handleAction(ActionEvent e) {
         //storing the source of the action
@@ -160,54 +119,9 @@ public class Controller {
         //sending -1 as an indicator for a error
         return -1;
     }
-
-    //inserting text into text field
+    //inserting value through text field
     public void setTextField(String s, TextField textField) {
         textField.setText(s);
-    }
-
-    //method for handling ok button
-    public void okButtonHandler() throws IOException {
-        //checking to see if id is assigned
-        if (isIdnull) {
-            //giving the value of string builder to id
-            id = sb.toString();
-            //making isIdnull variable false for next round
-            isIdnull = false;
-            //clearing string builder
-            sb.delete(0, sb.capacity());
-            //clearing text field
-            textField.clear();
-            //displaying a message to user
-            screen.setText("please enter your pin code: ");
-        } else {
-            //giving the value of the string builder to pin
-            pin = sb.toString();
-            //clearing string builder
-            sb.delete(0, sb.capacity());
-            //clearing text field
-            textField.clear();
-            //executing method
-            userLoginHandler(id, pin);
-        }
-    }
-
-    //method for handling user login
-    public void userLoginHandler(String id, String pin) throws IOException {
-        //init user
-        User loggedUser;
-        loggedUser = bank.userLogin(id, pin);
-        //checking to see if login was successful
-        if (loggedUser == null) {
-            //displaying a message to user
-            screen.setText("Either Id or Password was wrong, try again!" + "\n" +
-                    "\"Please Enter Your ID\"");
-            //resetting login process
-            isIdnull = true;
-            return;
-        }
-        //executing changeScreen method
-        changeScreen(mainPane.getScene(), "optionMenu",loggedUser);
     }
 
     @FXML
@@ -222,26 +136,25 @@ public class Controller {
 
         }
     }
-    //method for changing the screen
-    public void changeScreen(Scene main, String name,User user) throws IOException {
-        //init SceneController object
-        SceneController sc = new SceneController(main);
-        //init FXMLLoader
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        //setting the location
-        fxmlLoader.setLocation(getClass().getResource("optionMenu.fxml"));
-        //loading root from loader
-        Pane optionMenu = fxmlLoader.load();
-        //adding a pane to SceneController object
-        sc.addScreen("optionMenu",optionMenu);
+    //setting the user
+    public void setUser(User user) {
+        this.user = user;
+    }
+    //method for handling ok button
+    public void okHandler() throws IOException {
+        String s = sb.toString();
+        //converting string to integer
+        Integer value = Integer.parseInt(s);
+        //executing the deposit method
+        user.getAccounts().get(0).deposit(value);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("optionMenu.fxml"));
         //changing the screen
-        sc.activate(name);
-        //displaying welcome message to logged user
-        Stage stage = (Stage) main.getWindow();
-        stage.setTitle("Welcome "+user.getName());
-        //getting the controller
-        OptionMenuController controller = fxmlLoader.getController();
-        //passing loggedUser to controller as a param
+        mainPane.getScene().setRoot(loader.load());
+        OptionMenuController controller = loader.getController();
+        //passing the user to optionMenu screen
         controller.setUser(user);
+
+
     }
 }
