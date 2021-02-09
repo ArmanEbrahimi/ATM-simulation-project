@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionMenuController">
+<BorderPane prefHeight="467.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OptionMenuController">
     <bottom>
         <SplitPane dividerPositions="0.6514285714285715" prefHeight="172.0" prefWidth="704.0" BorderPane.alignment="CENTER">
             <items>
@@ -31,7 +31,7 @@
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Button fx:id="buttonOne" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="1" />
+                                <Button fx:id="buttonOne" mnemonicParsing="false" onAction="#showBalance" prefHeight="32.0" prefWidth="68.0" text="1" />
                                 <Button fx:id="buttonTwo" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="2" GridPane.columnIndex="1" />
                                 <Button fx:id="buttonFour" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="4" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonSeven" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="7" GridPane.rowIndex="2" />
@@ -68,7 +68,7 @@
         </SplitPane>
     </bottom>
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefHeight="212.0" prefWidth="379.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -115,7 +115,7 @@
                   <Insets left="30.0" />
                </padding>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="2">
+            <Button fx:id="balance" mnemonicParsing="false" onAction="#showBalance" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>

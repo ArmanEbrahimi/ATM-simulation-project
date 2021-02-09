@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.Bank;
 import model.User;
@@ -203,11 +204,8 @@ public class Controller {
             isIdnull = true;
             return;
         }
+        //executing changeScreen method
         changeScreen(buttonOK.getScene(), "optionMenu",loggedUser);
-//        //displaying  a message to user
-//        screen.setText("Welcome "+loggedUser.getName());
-//            //disabling text field
-//            textField.setDisable(true);
     }
 
     @FXML
@@ -224,11 +222,24 @@ public class Controller {
     }
     //method for changing the screen
     public void changeScreen(Scene main, String name,User user) throws IOException {
+        //init SceneController object
         SceneController sc = new SceneController(main);
-        sc.addScreen("optionMenu", FXMLLoader.load(getClass().getResource("optionMenu.fxml")));
+        //init FXMLLoader
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        //setting the location
+        fxmlLoader.setLocation(getClass().getResource("optionMenu.fxml"));
+        //loading root from loader
+        Pane optionMenu = fxmlLoader.load();
+        //adding a pane to SceneController object
+        sc.addScreen("optionMenu",optionMenu);
+        //changing the screen
         sc.activate(name);
-        //displaying welcome message to user on title of stage
+        //didplaying welcome message to logged user
         Stage stage = (Stage) main.getWindow();
         stage.setTitle("Welcome "+user.getName());
+        //getting the controller
+        OptionMenuController controller = fxmlLoader.getController();
+        //passing loggedUser to controller as a param
+        controller.setUser(user);
     }
 }
