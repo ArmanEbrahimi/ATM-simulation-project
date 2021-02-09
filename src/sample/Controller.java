@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.Bank;
 import model.User;
 
@@ -202,8 +203,7 @@ public class Controller {
             isIdnull = true;
             return;
         }
-
-        changeScreen(buttonOK.getScene(), "optionMenu");
+        changeScreen(buttonOK.getScene(), "optionMenu",loggedUser);
 //        //displaying  a message to user
 //        screen.setText("Welcome "+loggedUser.getName());
 //            //disabling text field
@@ -222,10 +222,13 @@ public class Controller {
 
         }
     }
-
-    public void changeScreen(Scene main, String name) throws IOException {
+    //method for changing the screen
+    public void changeScreen(Scene main, String name,User user) throws IOException {
         SceneController sc = new SceneController(main);
         sc.addScreen("optionMenu", FXMLLoader.load(getClass().getResource("optionMenu.fxml")));
         sc.activate(name);
+        //displaying welcome message to user on title of stage
+        Stage stage = (Stage) main.getWindow();
+        stage.setTitle("Welcome "+user.getName());
     }
 }
