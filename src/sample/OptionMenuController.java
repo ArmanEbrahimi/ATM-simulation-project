@@ -50,6 +50,7 @@ public class OptionMenuController {
         //change the screen
 
     }
+    @FXML
     public void showWithdrawWindow() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("withDrawWindow.fxml"));
@@ -61,6 +62,19 @@ public class OptionMenuController {
         //change the screen
 
     }
+    public void showTransferWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transferWindow.fxml"));
+        Scene scene = mainPane.getScene();
+        scene.setRoot(loader.load());
+        TransferController controller = loader.getController();
+        //passing the user to deposit controller
+        controller.setUser(user);
+        //change the screen
+
+    }
+
+    @FXML
     //handling cancel button
     public void cancelButtonHandler(){
         System.exit(0);

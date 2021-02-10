@@ -135,7 +135,7 @@
                   <Insets right="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#showTransferWindow" prefHeight="23.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets right="5.0" />
                </GridPane.margin>

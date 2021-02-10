@@ -2,26 +2,16 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import model.Bank;
+import model.Account;
 import model.User;
 
 import java.io.IOException;
+import java.util.Optional;
 
-public class Controller {
-
-    @FXML
-    Label screen;
-    @FXML
-    TextField textField;
+public class TransferController {
     @FXML
     Button buttonOne;
     @FXML
@@ -47,48 +37,16 @@ public class Controller {
     @FXML
     Button cancelButton;
     @FXML
+    TextField textField;
+    @FXML
     Pane mainPane;
-    //variable for storing a string
-    StringBuilder sb;
-    //variable for storing id
-    String id;
-    //variable for storing pincode
-    String pin;
-    //variable for storing a bank
-    Bank bank;
-    //variable to check if the id is assigned
-    boolean isIdnull = true;
+    @FXML
+    Label label;
+    StringBuilder sb = new StringBuilder();
+    private User user;
+    private boolean isIdValid = false;
+    private Account destination;
 
-    User loggedUser;
-    Stage stage;
-
-    public void initialize() throws IOException {
-        //init string builder
-        sb = new StringBuilder();
-        //init bank
-        bank = new Bank("Melli");
-        //init user
-        User user = bank.addUser("Arman", "Ebrahimi", "1234");
-        //init scene controller
-        bank.addUser("Zarina","Shiri","1234");
-
-        //executing promptmainManu method
-        promptMainMenu(bank, screen);
-        //setting an action for cancel button
-        cancelButton.setOnMouseClicked(e->{
-            screen.setText("GoodBye!");
-            System.exit(0);
-        });
-
-
-    }
-
-    private static void promptMainMenu(Bank bank, Label label) {
-        //displaying welcome message to user
-        label.setText("Welcome to Bank " + bank.getName() + "\n" +
-                "\"Please Enter Your ID\"");
-
-    }
 
     public int handleAction(ActionEvent e) {
         //storing the source of the action
@@ -167,54 +125,9 @@ public class Controller {
         //sending -1 as an indicator for a error
         return -1;
     }
-
-    //inserting text into text field
+    //inserting value through text field
     public void setTextField(String s, TextField textField) {
         textField.setText(s);
-    }
-
-    //method for handling ok button
-    public void okButtonHandler() throws IOException {
-        //checking to see if id is assigned
-        if (isIdnull) {
-            //giving the value of string builder to id
-            id = sb.toString();
-            //making isIdnull variable false for next round
-            isIdnull = false;
-            //clearing string builder
-            sb.delete(0, sb.capacity());
-            //clearing text field
-            textField.clear();
-            //displaying a message to user
-            screen.setText("please enter your pin code: ");
-        } else {
-            //giving the value of the string builder to pin
-            pin = sb.toString();
-            //clearing string builder
-            sb.delete(0, sb.capacity());
-            //clearing text field
-            textField.clear();
-            //executing method
-            userLoginHandler(id, pin);
-        }
-    }
-
-    //method for handling user login
-    public void userLoginHandler(String id, String pin) throws IOException {
-        //init user
-        loggedUser = bank.userLogin(id, pin);
-        //checking to see if login was successful
-        if (loggedUser == null) {
-            //displaying a message to user
-            screen.setText("Either Id or Password was wrong, try again!" + "\n" +
-                    "\"Please Enter Your ID\"");
-            //resetting login process
-            isIdnull = true;
-            return;
-        }
-        //executing changeScreen method
-        stage = (Stage)mainPane.getScene().getWindow();
-        showOptionMenu();
     }
 
     @FXML
@@ -226,16 +139,85 @@ public class Controller {
             sb.deleteCharAt((sb.length()) - 1);
             //deleting last character of text field
             textField.setText(sb.toString());
-
         }
     }
+    @FXML
+    public void okHandler() throws IOException {
+        //checking to see if destination has been set
+        if(!isIdValid){
+            //finding destination
+            destination = user.getAccounts().get(0).getBank().findAccount(sb.toString());
+            //displaying error message to user
+            if(destination == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Invalid ID");
+                alert.setContentText("The ID you entered was incorrect! ");
+                alert.showAndWait();
+            }else{
+                //asking user to confirm destination
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText("Confirmation");
+                alert.setContentText("You are transferring money to : "+destination.getHolder().getName());
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK){
+                    //changing isIdValid status to true
+                    isIdValid = true;
+                    //changing label text
+                    label.setText("How much would you like to transfer?");
+                }
+            }
 
+            //clearing string builder
+            sb.delete(0, sb.capacity());
+            //clearing text field
+            textField.clear();
+        }else {
+            //storing account balance before transferring
+            double currentBalance = user.getAccounts().get(0).getBalance();
+            String s = sb.toString();
+            Integer amount = Integer.parseInt(s);
+            //executing transfer method
+            user.getAccounts().get(0).transferMoney(destination,amount);
+            //comparing current balance to balance before transfer
+            if (currentBalance == user.getAccounts().get(0).getBalance()){
+                //displaying unsuccessful transfer message to user
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Insufficient Balance");
+                alert.setContentText("Your Balance Is Not Enough!");
+                alert.showAndWait();
+                sb.delete(0, sb.capacity());
+                textField.clear();
+            }else {
+                //displaying success transfer to user
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Successful");
+                alert.setContentText("You Successfully Transferred "+amount+" To\n" +
+                        destination.getHolder().getName()+"\nYour Current Balance is : "
+                        +user.getAccounts().get(0).getBalance());
+                alert.showAndWait();
+                //changing screen to option menu
+                showOptionMenu();
+            }
+
+
+        }
+
+
+    }
     public void showOptionMenu() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("optionMenu.fxml"));
+        //changing the screen
         mainPane.getScene().setRoot(loader.load());
         OptionMenuController controller = loader.getController();
-        controller.setUser(loggedUser);
-        stage.setTitle("Welcome "+loggedUser.getName());
+        //passing the user to optionMenu screen
+        controller.setUser(user);
     }
+    //setting the user
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
+
 }

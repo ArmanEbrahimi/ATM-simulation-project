@@ -155,7 +155,5 @@ public class DepositController {
         OptionMenuController controller = loader.getController();
         //passing the user to optionMenu screen
         controller.setUser(user);
-
-
     }
 }

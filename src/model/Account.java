@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Account {
     private String name;
@@ -10,7 +9,7 @@ public class Account {
     protected double balance;
     private String uuid;
     private Bank bank;
-    private List<Transaction> tansactions;
+    private List<Transaction> transactions;
 
     public Account(String name, User holder,Bank bank ) {
         //setting account's name and holder
@@ -21,7 +20,7 @@ public class Account {
        this.uuid = bank.generateAccountId();
 
        //initializing array list for transaction
-        this.tansactions = new ArrayList<>();
+        this.transactions = new ArrayList<>();
         //linking to associated bank
         this.bank = bank;
 
@@ -47,11 +46,11 @@ public class Account {
 
     public void transferMoney(Account destination, double amount) {
             //init transactions
-            this.tansactions = new ArrayList<>();
+            this.transactions = new ArrayList<>();
             //creating a transaction
             Transaction transaction = new Transaction(amount, this, destination,bank,Transaction.Operation.TRANSFER);
             //adding transactions to history
-            this.tansactions.add(transaction);
+            this.transactions.add(transaction);
             //executing transaction
             this.bank.transactionEvent.fire(transaction);
     }
@@ -69,4 +68,11 @@ public class Account {
         return this.balance;
     }
 
+    public Bank getBank() {
+        return bank;
+    }
+
+    public List<Transaction> getTransaction() {
+        return transactions;
+    }
 }
