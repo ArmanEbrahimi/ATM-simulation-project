@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import model.Bank;
 import model.User;
 
@@ -46,7 +47,7 @@ public class Controller {
     @FXML
     Button cancelButton;
     @FXML
-            Pane mainPane;
+    Pane mainPane;
     //variable for storing a string
     StringBuilder sb;
     //variable for storing id
@@ -58,13 +59,18 @@ public class Controller {
     //variable to check if the id is assigned
     boolean isIdnull = true;
 
-    public void initialize() {
+    User loggedUser;
+    Stage stage;
+
+    public void initialize() throws IOException {
         //init string builder
         sb = new StringBuilder();
         //init bank
         bank = new Bank("Melli");
         //init user
         User user = bank.addUser("Arman", "Ebrahimi", "1234");
+        //init scene controller
+
         //executing promptmainManu method
         promptMainMenu(bank, screen);
         //setting an action for cancel button
@@ -195,7 +201,6 @@ public class Controller {
     //method for handling user login
     public void userLoginHandler(String id, String pin) throws IOException {
         //init user
-        User loggedUser;
         loggedUser = bank.userLogin(id, pin);
         //checking to see if login was successful
         if (loggedUser == null) {
@@ -207,7 +212,8 @@ public class Controller {
             return;
         }
         //executing changeScreen method
-        changeScreen(mainPane.getScene(), "optionMenu",loggedUser);
+        stage = (Stage)mainPane.getScene().getWindow();
+        showOptionMenu();
     }
 
     @FXML
@@ -222,26 +228,13 @@ public class Controller {
 
         }
     }
-    //method for changing the screen
-    public void changeScreen(Scene main, String name,User user) throws IOException {
-        //init SceneController object
-        SceneController sc = new SceneController(main);
-        //init FXMLLoader
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        //setting the location
-        fxmlLoader.setLocation(getClass().getResource("optionMenu.fxml"));
-        //loading root from loader
-        Pane optionMenu = fxmlLoader.load();
-        //adding a pane to SceneController object
-        sc.addScreen("optionMenu",optionMenu);
-        //changing the screen
-        sc.activate(name);
-        //displaying welcome message to logged user
-        Stage stage = (Stage) main.getWindow();
-        stage.setTitle("Welcome "+user.getName());
-        //getting the controller
-        OptionMenuController controller = fxmlLoader.getController();
-        //passing loggedUser to controller as a param
-        controller.setUser(user);
+
+    public void showOptionMenu() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("optionMenu.fxml"));
+        mainPane.getScene().setRoot(loader.load());
+        OptionMenuController controller = loader.getController();
+        controller.setUser(loggedUser);
+        stage.setTitle("Welcome "+loggedUser.getName());
     }
 }

@@ -1,8 +1,10 @@
 package sample;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -10,7 +12,8 @@ import model.User;
 
 import java.io.IOException;
 
-public class DepositController {
+public class WithDrawController {
+    private User user;
     @FXML
     Button buttonOne;
     @FXML
@@ -40,8 +43,6 @@ public class DepositController {
     @FXML
     Pane mainPane;
     StringBuilder sb = new StringBuilder();
-    private User user;
-
 
     public int handleAction(ActionEvent e) {
         //storing the source of the action
@@ -138,16 +139,31 @@ public class DepositController {
         }
     }
     //setting the user
-    public void setUser(User user) {
-        this.user = user;
-    }
     //method for handling ok button
     public void okHandler() throws IOException {
+        //storing the current balacne of the user
+        double current  = user.getAccounts().get(0).getBalance();
         String s = sb.toString();
         //converting string to integer
         Integer value = Integer.parseInt(s);
-        //executing the deposit method
-        user.getAccounts().get(0).deposit(value);
+        //executing the withdraw method
+        double result = user.getAccounts().get(0).drawCash(value);
+        //checking to see if the operation was successful
+        if (result == current){
+            //displaying alert to user
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Insufficient Balance!");
+            alert.setContentText("Your account balance is not enough");
+            alert.showAndWait();
+        }else {
+            //displaying successful message to user
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Successful!");
+            alert.setContentText("Your balance is: "+user.getAccounts().get(0).getBalance());
+            alert.showAndWait();
+        }
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("optionMenu.fxml"));
         //changing the screen
@@ -158,4 +174,10 @@ public class DepositController {
 
 
     }
+    //setting user
+    public void setUser(User user) {
+        this.user =user;
+    }
+
+
 }

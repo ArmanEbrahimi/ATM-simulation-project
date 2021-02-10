@@ -32,12 +32,12 @@
                             </rowConstraints>
                             <children>
                                 <Button fx:id="buttonOne" mnemonicParsing="false" onAction="#showBalance" prefHeight="32.0" prefWidth="68.0" text="1" />
-                                <Button fx:id="buttonTwo" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="2" GridPane.columnIndex="1" />
+                                <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#showDepositWindow" prefHeight="32.0" prefWidth="68.0" text="2" GridPane.columnIndex="1" />
                                 <Button fx:id="buttonFour" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="4" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonSeven" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="7" GridPane.rowIndex="2" />
                                 <Button fx:id="buttonFive" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonEight" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Button fx:id="buttonThree" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="3" GridPane.columnIndex="2" />
+                                <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#showWithdrawWindow" prefHeight="32.0" prefWidth="68.0" text="3" GridPane.columnIndex="2" />
                                 <Button fx:id="buttonSix" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonNine" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                                 <Button fx:id="buttonZero" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -59,7 +59,7 @@
                             <children>
                                 <Button fx:id="buttonOK" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: GREEN;" text="OK" textFill="WHITE" />
                                 <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: YELLOW;" text="CORRECT" textFill="WHITE" GridPane.rowIndex="1" />
-                                <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: RED;" text="CANCEL" textFill="WHITE" GridPane.rowIndex="2" />
+                                <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonHandler" prefHeight="47.0" prefWidth="99.0" style="-fx-background-color: RED;" text="CANCEL" textFill="WHITE" GridPane.rowIndex="2" />
                             </children>
                         </GridPane>
                     </children>
@@ -120,7 +120,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#showWithdrawWindow" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>

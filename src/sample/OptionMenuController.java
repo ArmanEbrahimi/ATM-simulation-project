@@ -47,6 +47,23 @@ public class OptionMenuController {
         DepositController controller = loader.getController();
         //passing the user to deposit controller
         controller.setUser(user);
+        //change the screen
+
+    }
+    public void showWithdrawWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("withDrawWindow.fxml"));
+        Scene scene = mainPane.getScene();
+        scene.setRoot(loader.load());
+        WithDrawController controller = loader.getController();
+        //passing the user to deposit controller
+        controller.setUser(user);
+        //change the screen
+
+    }
+    //handling cancel button
+    public void cancelButtonHandler(){
+        System.exit(0);
     }
 
 
