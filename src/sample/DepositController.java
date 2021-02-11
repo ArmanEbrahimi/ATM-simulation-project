@@ -156,4 +156,12 @@ public class DepositController {
         //passing the user to optionMenu screen
         controller.setUser(user);
     }
+    public void showOptionMenu() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("optionMenu.fxml"));
+        //changing the screen
+        mainPane.getScene().setRoot(loader.load());
+        OptionMenuController controller = loader.getController();
+        controller.setUser(user);
+    }
 }

@@ -73,6 +73,20 @@ public class OptionMenuController {
         //change the screen
 
     }
+    public void showTransactionWindow() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("transactionWindow.fxml"));
+        Scene scene = mainPane.getScene();
+        scene.setRoot(loader.load());
+        TransactionController controller = loader.getController();
+        //passing the user to Transaction controller
+        controller.setUser(user);
+        //change the screen
+        controller.fillListView();
+
+
+    }
+
 
     @FXML
     //handling cancel button

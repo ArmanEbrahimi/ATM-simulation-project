@@ -39,14 +39,14 @@ public class Account {
     public double drawCash(double draw) {
             //creating transaction for withdraw
             Transaction withdraw = new Transaction(draw,this, Transaction.Operation.WITHDRAW);
+            //adding this transaction to transaction list
+            this.transactions.add(withdraw);
             //firing the withdraw consumer
             bank.transactionEvent.fire(withdraw);
         return balance;
     }
 
     public void transferMoney(Account destination, double amount) {
-            //init transactions
-            this.transactions = new ArrayList<>();
             //creating a transaction
             Transaction transaction = new Transaction(amount, this, destination,bank,Transaction.Operation.TRANSFER);
             //adding transactions to history
@@ -62,6 +62,8 @@ public class Account {
     public double deposit(int amount) {
         //creating transaction for deposit
         Transaction deposit = new Transaction(amount,this, Transaction.Operation.DEPOSIT);
+        //adding transaction to list
+        this.transactions.add(deposit);
         //executing transaction
         bank.transactionEvent.fire(deposit);
         //returning balance after depositing
@@ -73,6 +75,10 @@ public class Account {
     }
 
     public List<Transaction> getTransaction() {
+        for(Transaction t : transactions){
+            System.out.println(t);
+        }
         return transactions;
     }
+
 }

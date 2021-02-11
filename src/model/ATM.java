@@ -38,7 +38,7 @@ public class ATM {
                     "3. deposit\n"+
                     "4. transfer money\n"+
                     "5. print transactions\n"+
-                    "5. done");
+                    "6. done");
             //storing user's choice
             int choice = sc.nextInt();
             //validating user's choice
@@ -90,6 +90,9 @@ public class ATM {
                         loggedUser.getAccounts().get(0).transferMoney(destination, amount);
                         break;
                     case 5:
+                        System.out.println(loggedUser.getAccounts().get(0).getTransaction());
+                        break;
+                    case 6:
                         done = true;
                         break;
                 }

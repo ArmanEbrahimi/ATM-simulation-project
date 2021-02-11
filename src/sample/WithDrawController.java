@@ -141,7 +141,7 @@ public class WithDrawController {
     //setting the user
     //method for handling ok button
     public void okHandler() throws IOException {
-        //storing the current balacne of the user
+        //storing the current balance of the user
         double current  = user.getAccounts().get(0).getBalance();
         String s = sb.toString();
         //converting string to integer
@@ -173,6 +173,14 @@ public class WithDrawController {
         controller.setUser(user);
 
 
+    }
+    public void showOptionMenu() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("optionMenu.fxml"));
+        //changing the screen
+        mainPane.getScene().setRoot(loader.load());
+        OptionMenuController controller = loader.getController();
+        controller.setUser(user);
     }
     //setting user
     public void setUser(User user) {

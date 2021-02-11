@@ -1,10 +1,12 @@
 package model;
 
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.function.Consumer;
 
 public class Transaction {
-    enum Operation {
+    public enum Operation {
         DEPOSIT,
         TRANSFER,
         WITHDRAW
@@ -21,8 +23,9 @@ public class Transaction {
         this.amount = amount;
         this.source = source;
         this.operation = operation;
+        this.timeStamp = new Date();
     }
-
+    //construction for transfer
     public Transaction(double amount, Account source, Account destination, Bank bank,Operation operation) {
         this.amount = amount;
         this.source = source;
@@ -54,5 +57,14 @@ public class Transaction {
 
     public Operation getOperation() {
         return operation;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    @Override
+    public String toString() {
+        return timeStamp.toString();
     }
 }

@@ -33,9 +33,9 @@
                             <children>
                                 <Button fx:id="buttonOne" mnemonicParsing="false" onAction="#showBalance" prefHeight="32.0" prefWidth="68.0" text="1" />
                                 <Button fx:id="buttonTwo" mnemonicParsing="false" onAction="#showDepositWindow" prefHeight="32.0" prefWidth="68.0" text="2" GridPane.columnIndex="1" />
-                                <Button fx:id="buttonFour" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="4" GridPane.rowIndex="1" />
+                                <Button fx:id="buttonFour" mnemonicParsing="false" onAction="#showTransferWindow" prefHeight="32.0" prefWidth="68.0" text="4" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonSeven" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="7" GridPane.rowIndex="2" />
-                                <Button fx:id="buttonFive" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Button fx:id="buttonFive" mnemonicParsing="false" onAction="#showTransactionWindow" prefHeight="32.0" prefWidth="68.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <Button fx:id="buttonEight" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <Button fx:id="buttonThree" mnemonicParsing="false" onAction="#showWithdrawWindow" prefHeight="32.0" prefWidth="68.0" text="3" GridPane.columnIndex="2" />
                                 <Button fx:id="buttonSix" mnemonicParsing="false" prefHeight="32.0" prefWidth="68.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -125,7 +125,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="4">
+            <Button mnemonicParsing="false" onAction="#showTransactionWindow" prefHeight="23.0" prefWidth="23.0" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
